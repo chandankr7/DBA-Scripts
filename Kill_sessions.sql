@@ -21,6 +21,8 @@ select 'alter system kill session '''||sid||','||serial#||''' immediate;' from v
 
 select s.sql_hash_value, s.sql_id,s.program,s.module,s.username,s.osuser  from v$session s , v$process p where p.addr=s.paddr and p.spid=&spid
 /
+or
+select sid from v$session where PADDR=(select addr from v$process where pid=&pid);
 
 # Script to generate and kill sessions with long operations and in Inactive state
 
