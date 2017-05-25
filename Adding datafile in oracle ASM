@@ -1,0 +1,42 @@
+SQL> select name from v$tablespace;
+
+NAME
+——————————
+SYSTEM
+UNDOTBS1
+SYSAUX
+USERS
+TEMP
+
+SQL> select name from v$datafile;
+
+NAME
+——————————————————————————–
++DATA1/nonasmtoasm/datafile/system.259.721108803
++DATA1/nonasmtoasm/datafile/undotbs1.261.721108865
++DATA1/nonasmtoasm/datafile/sysaux.260.721108841
++DATA1/nonasmtoasm/datafile/users.262.721108873
+You have to define diskgroup name while adding datafile
+
+SQL> select name from v$asm_diskgroup;
+
+NAME
+——————————
+DATA1
+DATA
+
+Above we are having two asm diskgorup
+
+SQL> alter tablespace users add datafile ‘+data1’ size 5M;
+
+Tablespace altered.
+
+SQL> select name from v$datafile;
+
+NAME
+——————————————————————————–
++DATA1/nonasmtoasm/datafile/system.259.721108803
++DATA1/nonasmtoasm/datafile/undotbs1.261.721108865
++DATA1/nonasmtoasm/datafile/sysaux.260.721108841
++DATA1/nonasmtoasm/datafile/users.262.721108873
++DATA1/nonasmtoasm/datafile/users.269.721187971
